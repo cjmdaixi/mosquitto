@@ -83,24 +83,6 @@ if (WITH_SRV)
 	endif (ARES_HEADER)
 endif (WITH_SRV)
 
-add_library(libmosquitto SHARED ${C_SRC})
-set_target_properties(libmosquitto PROPERTIES
-	POSITION_INDEPENDENT_CODE 1
-)
-
-target_link_libraries(libmosquitto ${LIBRARIES})
-
-set_target_properties(libmosquitto PROPERTIES
-	OUTPUT_NAME mosquitto
-	VERSION ${VERSION}
-	SOVERSION 1
-)
-
-install(TARGETS libmosquitto
-	RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
-	ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-	LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}")
-
 if (WITH_STATIC_LIBRARIES)
 	add_library(libmosquitto_static STATIC ${C_SRC})
 	if (WITH_PIC)

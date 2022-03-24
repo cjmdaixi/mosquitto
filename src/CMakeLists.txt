@@ -29,6 +29,7 @@ set (MOSQ_SRCS
 	loop.c
 	../lib/memory_mosq.c ../lib/memory_mosq.h
 	memory_public.c
+	mosquitto_broker_interface.h
 	mosquitto.c
 	../include/mosquitto_broker.h mosquitto_broker_internal.h
 	../lib/misc_mosq.c ../lib/misc_mosq.h
@@ -204,19 +205,14 @@ if (WITH_WEBSOCKETS)
 	endif (STATIC_WEBSOCKETS)
 endif (WITH_WEBSOCKETS)
 
-add_executable(mosquitto ${MOSQ_SRCS})
-target_link_libraries(mosquitto ${MOSQ_LIBS})
-if (WIN32)
-	set_target_properties(mosquitto PROPERTIES ENABLE_EXPORTS 1)
-endif (WIN32)
+add_library(mosquitto_broker STATIC ${MOSQ_SRCS})
+target_link_libraries(mosquitto_broker ${MOSQ_LIBS})
 
-if (UNIX)
-	if (APPLE)
-		set_target_properties(mosquitto PROPERTIES LINK_FLAGS "-Wl,-exported_symbols_list -Wl,${mosquitto_SOURCE_DIR}/src/linker-macosx.syms")
-	else (APPLE)
-		set_target_properties(mosquitto PROPERTIES LINK_FLAGS "-Wl,-dynamic-list=${mosquitto_SOURCE_DIR}/src/linker.syms")
-	endif (APPLE)
-endif (UNIX)
+set_target_properties(mosquitto_broker PROPERTIES
+    OUTPUT_NAME mosquitto_broker
+    PREFIX ""
+    VERSION ${VERSION}
+)
 
-install(TARGETS mosquitto RUNTIME DESTINATION "${CMAKE_INSTALL_SBINDIR}")
-install(FILES ../include/mosquitto_broker.h ../include/mosquitto_plugin.h DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
+install(TARGETS mosquitto_broker ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}")
+install(FILES ../include/mosquitto_broker.h ../include/mosquitto_plugin.h mosquitto_broker_interface.h DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")

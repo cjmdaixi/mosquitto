@@ -44,5 +44,5 @@ if (WITH_TLS AND CJSON_FOUND)
 
 	target_link_libraries(mosquitto_ctrl ${OPENSSL_LIBRARIES} ${CJSON_LIBRARIES})
 
-	install(TARGETS mosquitto_ctrl RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
+	install(TARGETS mosquitto_ctrl BUNDLE DESTINATION "${CMAKE_INSTALL_BINDIR}")
 endif (WITH_TLS AND CJSON_FOUND)

@@ -14,5 +14,5 @@ if (WITH_TLS)
 
 
 	target_link_libraries(mosquitto_passwd ${OPENSSL_LIBRARIES})
-	install(TARGETS mosquitto_passwd RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
+	install(TARGETS mosquitto_passwd BUNDLE DESTINATION "${CMAKE_INSTALL_BINDIR}")
 endif (WITH_TLS)
