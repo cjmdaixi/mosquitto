@@ -436,7 +436,7 @@ static int pid__write(void)
 }
 
 
-int start_mosquitto(int argc, char *argv[])
+int mosquitto_main(int argc, char *argv[])
 {
 	struct mosquitto__config config;
 #ifdef WITH_BRIDGE
@@ -646,10 +646,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 }
 #endif
 
-int start_mosquitto_main()
+int start_mosquitto(int port)
 {
-    log__printf(NULL, MOSQ_LOG_INFO, "start_mosquitto_main");
-    printf("start_mosquitto_main p\n");
-    char* argv[] = {"hello"};
-    return start_mosquitto(1, argv);
+    log__printf(NULL, MOSQ_LOG_INFO, "start_mosquitto port: %d", port);
+    char arguments[10] = {0};
+    sprintf(arguments, "%d", port);
+    char* argv[] = {"mosquitto", "-p", arguments};
+    return mosquitto_main(3, argv);
 }

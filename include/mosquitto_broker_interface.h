@@ -5,8 +5,7 @@
 extern "C" {
 #endif
 
-int start_mosquitto_main();
-int start_mosquitto(int argc, char *argv[]);
+int start_mosquitto(int port);
 
 #ifdef __cplusplus
 }

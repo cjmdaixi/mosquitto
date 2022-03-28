@@ -29,7 +29,7 @@ set (MOSQ_SRCS
 	loop.c
 	../lib/memory_mosq.c ../lib/memory_mosq.h
 	memory_public.c
-	mosquitto_broker_interface.h
+	../include/mosquitto_broker_interface.h
 	mosquitto.c
 	../include/mosquitto_broker.h mosquitto_broker_internal.h
 	../lib/misc_mosq.c ../lib/misc_mosq.h
@@ -215,4 +215,4 @@ set_target_properties(mosquitto_broker PROPERTIES
 )
 
 install(TARGETS mosquitto_broker ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}")
-install(FILES ../include/mosquitto_broker.h ../include/mosquitto_plugin.h mosquitto_broker_interface.h DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
+install(FILES ../include/mosquitto_broker.h ../include/mosquitto_plugin.h ../include/mosquitto_broker_interface.h DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")

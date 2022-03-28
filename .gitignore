@@ -12,6 +12,8 @@ dhat.out.*
 massif.out.*
 vglog*
 
+.DS_Store
+
 c/*.test
 cpp/*.test
 
