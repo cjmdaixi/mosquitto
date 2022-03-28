@@ -6,6 +6,14 @@ and 3.1 of the MQTT protocol. It also includes a C and C++ client library, and
 the `mosquitto_pub` and `mosquitto_sub` utilities for publishing and
 subscribing.
 
+## Compile for iOS
+
+1. Create a shadow build directory, e.g. mosquitto_build residing in the same directory of mosquitto source.
+2. CMake:
+cmake ../mosquitto -DCMAKE_OSX_SYSROOT:STRING=iphoneos -DCMAKE_OSX_DEPLOYMENT_TARGET:STRING=15.0 -DCMAKE_OSX_ARCHITECTURES:STRING=arm64  -DCMAKE_GENERATOR:STRING=Xcode -DCMAKE_SYSTEM_NAME:STRING=iOS -DWITH_TLS:OPTION=OFF -DWITH_PLUGINS:OPTION=OFF -DWITH_STATIC_LIBRARIES:OPTION=ON -DWITH_LIB_CPP:OPTION=OFF -DWITH_APPS:OPTION=OFF  -DWITH_BROKER:OPTION=ON -DWITH_CLIENTS:OPTION=OFF -DDOCUMENTATION:OPTION=OFF -DCMAKE_INSTALL_PREFIX:PATH=install
+3. Open Xcode project and select the mosquitto_broker as the target.
+4. Compile.
+
 ## Links
 
 See the following links for more information on MQTT:
